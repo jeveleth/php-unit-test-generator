@@ -51,7 +51,7 @@ class TestGenerator extends Command
     {
         if (file_exists($filePath)) {
             $fileArray = file($filePath, FILE_IGNORE_NEW_LINES);
-            $pattern = '/function/';
+            $pattern = "/\s\bfunction\b\s/";
             $functions = array();
             foreach ($fileArray as $key => $value) {
                 if (preg_match($pattern, $value)) {
@@ -84,7 +84,7 @@ class TestGenerator extends Command
         foreach ($finalFunctions as $key => $value) {
             $rawFunction = preg_replace('/\(+.*\)+/i', '', $value);
             $upcaseFunction = ucfirst($rawFunction);
-            $finalTestFunctions[]= "\n\tpublic function test$upcaseFunction()\n\t{\n\n\t}\n";
+            $finalTestFunctions[]= "\n\tpublic function". "test$upcaseFunction()\n\t{\n\n\t}\n";
         }
         return $finalTestFunctions;
     }
