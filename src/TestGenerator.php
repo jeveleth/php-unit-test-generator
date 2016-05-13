@@ -6,11 +6,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-// Read in file,
-    // Grep for functions in class file
-    // Spit out "test$functionName"
-    // Create new file in tests/ dir with current file's name plus Test
-    // Write to new file with test functions
+/**
+ *
+ * Read in file,
+ * Grep for functions in class file
+ * Spit out "test$functionName"
+ * Create new file in tests/ dir with current file's name plus Test
+ * Write to new file with test functions
+ */
 class TestGenerator extends Command
 {
     /**
@@ -84,7 +87,7 @@ class TestGenerator extends Command
         foreach ($finalFunctions as $key => $value) {
             $rawFunction = preg_replace('/\(+.*\)+/i', '', $value);
             $upcaseFunction = ucfirst($rawFunction);
-            $finalTestFunctions[]= "\n\tpublic function". "test$upcaseFunction()\n\t{\n\n\t}\n";
+            $finalTestFunctions[]= "\n\tpublic function". " test$upcaseFunction()\n\t{\n\n\t}\n";
         }
         return $finalTestFunctions;
     }
