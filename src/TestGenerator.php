@@ -7,7 +7,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- *
  * Read in file,
  * Grep for functions in class file
  * Spit out "test$functionName"
@@ -87,7 +86,10 @@ class TestGenerator extends Command
         foreach ($finalFunctions as $key => $value) {
             $rawFunction = preg_replace('/\(+.*\)+/i', '', $value);
             $upcaseFunction = ucfirst($rawFunction);
-            $finalTestFunctions[]= "\n\tpublic function". " test$upcaseFunction()\n\t{\n\n\t}\n";
+            $upcaseFunctionSuccess =  $upcaseFunction . "Success()";
+            $upcaseFunctionFailure =  $upcaseFunction . "Failure()";
+            $finalTestFunctions[]= "\n\tpublic function". " test$upcaseFunctionSuccess\n\t{\n\n\t}\n";
+            $finalTestFunctions[]= "\n\tpublic function". " test$upcaseFunctionFailure\n\t{\n\n\t}\n";
         }
         return $finalTestFunctions;
     }
