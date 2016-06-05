@@ -19,6 +19,16 @@ class TestGenerator extends Command
      * [configure description]
      * @return [type] [description]
      */
+    protected function myFakeFunction()
+    {
+        return true;
+    }
+
+    public function runMyFakeFunction()
+    {
+        return $this->myFakeFunction();
+    }
+
     protected function configure()
     {
         $this->setName('generate-test')
@@ -38,10 +48,12 @@ class TestGenerator extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        var_dump('hello');
         $filePath = $input->getArgument('testFilePath');
         $functions = $this->parseFile($filePath);
         $finalTestFunctions = $this->returnTestFunctions($functions);
         $this->writeFunctionsToFile($finalTestFunctions, $filePath);
+        return 'love';
     }
 
     /**
